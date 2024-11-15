@@ -1,0 +1,305 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header */
+header {
+    background-color: #0077B6;
+    padding: 20px 0;
+}
+
+.logo img {
+    width: 82px;
+    height: 92px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dropdown select {
+    background-color: #00aaff;
+    width: 120px;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 20px; 
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+}
+
+.dropdown select option {
+    background-color: white;
+    color: black;
+}
+
+.dropdown .logout select {
+    color: red;
+}
+
+.dropdown select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+    position: relative;
+}
+
+.dropdown::after {
+    content: '▼'; 
+    position: absolute;
+    right: 15px;
+    color: white;
+    pointer-events: none;
+}
+
+/* Dashboard analisis */
+.dashboard-title {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    padding: 20px;
+    background-color: #003366;
+    color: white;
+}
+
+.dashboard-title h2 {
+    margin: 0;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box {
+    text-align: center;
+    color: #333;
+}
+
+.stat-box h1 {
+    font-size: 2em;
+    color: #006699;
+}
+
+.analysis-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.analysis {
+    background-color: #f0f0f0;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background-color: #f9f9f9;  
+    padding: 20px 0;
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-inner {
+    display: flex;
+    gap: 30px;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+}
+
+.footer-logo {
+    margin-right: 60px; 
+}
+
+.footer-logo img {
+    width: 164px;
+    height: 260px;
+}
+
+.footer-logo-kemdikbud img {
+    width: 80px;
+    height: 80px;
+}
+
+.footer-logo-bisaai img {
+    width: 180px;
+    height: 70px;
+}
+
+.footer-logo-msib img {
+    width: 160px;
+    height: 70px;
+}
+
+.footer-logo-kampusmerdeka img {
+    width: 140px;
+    height: 70%;
+}
+
+.footer-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.footer-links ul li {
+    margin-right: 20px;
+}
+
+.footer-links ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.quick-links {
+    margin-top: 20px; 
+    margin-left: 80px;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column; 
+    margin-top: 10px; 
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+}
+
+.footer-copyright {
+    text-align: center; 
+    margin-top: 10px;
+}
+
+.footer-copyright p {
+    font-size: 0.6em;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+        /* background-color: violet; */
+        width: 100%;
+        
+    }
+
+    nav ul li {
+        margin-bottom: 10px;
+        margin-right: 0;
+        
+    }
+
+    .auth-buttons {
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .about-content img {
+        margin-right: 0;
+        margin-bottom: 20px;
+        height: auto; /* Maintain aspect ratio */
+        max-width: 100%; /* Responsive image */
+    }
+
+    .what-aerosite {
+        text-align: center; /* Center the text on smaller screens */
+    }
+
+    .members {
+        padding: 20px 10px;
+    }
+
+    .member-list {
+        flex-direction: column; /* Stack member cards vertically */
+        align-items: center;
+    }
+
+    .member-card {
+        width: 100%; /* Responsive width for member card */
+        max-width: 300px; /* Limit max width */
+    }
+
+    .footer-inner {
+        flex-direction: column; /* Stack footer items vertically */
+        align-items: center;
+    }
+
+    .footer-logo {
+        margin-bottom: 20px;
+        margin: 0;
+    }
+
+    .quick-links {
+        margin-left: 0; /* Center quick links */
+        text-align: center;
+    }
+}
