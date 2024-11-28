@@ -4,11 +4,59 @@ from app import app, db, User, Admin
 import time
 import pandas as pd
 import pickle
+import base64
 
 st.set_page_config(page_title="Aerosite for User", page_icon=":airplane:", layout="wide")
 
 st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body * {  
+        font-family: 'Poppins', sans-serif;
+    }
+    .navbar {
+        background-color: #0077b6;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar .logo img {
+        height: 50px;
+    }
+    .navbar .title-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .navbar .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        margin: 0;
+    }
+    .navbar .profile {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .navbar .profile .icon {
+        font-family: 'Material Symbols Outlined';
+        font-size: 30px;
+        margin-right: 10px;
+    }
+    .navbar .filter-dropdown {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 14px;
+        color: #0077b6;
+    }
     section[data-testid="stSidebar"] {
         background-color: #0077b6;
     }
@@ -22,6 +70,12 @@ st.markdown("""
     }     
     </style>
     """, unsafe_allow_html=True)
+
+def encodedImage(file_path):
+    with open(file_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode("utf-8")
+    
+logo_aero = encodedImage("./static/images/logowarna.png")  
 
 def show_error(message):
     time.sleep(2)
@@ -37,6 +91,17 @@ try:
         else:
             user = User.query.filter_by(token=session_token).first()  
             if user:
+                st.markdown(f"""
+                <div class="navbar">
+                    <div class="logo">
+                        <img src="data:image/png;base64,{logo_aero}" alt="Logo">
+                    </div>
+                    <div class="profile">
+                        <span class="icon">account_circle</span>
+                        Welcome, {user.name}!
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)  
                 open_model = open("model/model_satisfaction.sav", "rb")
                 model = pickle.load(open_model)
                 if user.survey:
@@ -44,14 +109,9 @@ try:
                 else:
                     st.session_state.step = 0
 
-                with st.sidebar:
-                    col1, col2, col3 = st.columns([1, 3, 1])
-                    with col2:
-                        st.image("static/images/logowarna.png", width=150)
-                    st.markdown('<br>', unsafe_allow_html=True)    
-                    selected = option_menu("Menu", ["Survei Penerbangan", "Hasil Survei", "Pengaturan"],
-                                        icons=['airplane-engines', 'bar-chart', 'gear'],
-                                        menu_icon="list", default_index=0)
+                selected = option_menu(menu_title=None, options=["Survei Penerbangan", "Pengaturan"],
+                                    icons=['airplane-engines', 'gear'],
+                                    menu_icon="list", default_index=0, orientation="horizontal")
 
                 if selected == "Survei Penerbangan":
                     if st.session_state.step == 0:
@@ -84,8 +144,17 @@ try:
                                     st.markdown('<br>', unsafe_allow_html=True)
 
                             st.title("Isi Survei")
+                            with st.container():
+                                st.markdown(
+                                    """
+                                    <div style="background-color: #F7F4A6; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                                        <p style="font-size: 15px; margin-bottom: 0px;"><b>Catatan:</b></p>
+                                        <p style="font-size: 15px; margin-top: 0px; margin-bottom: 0;"><b><u>0 untuk sangat tidak puas; 5 untuk sangat puas</u></b></p>
+                                    </div>
+                                    """, 
+                                    unsafe_allow_html=True
+                                )
                             with st.container(border=True):
-                                st.markdown("<p style='font-style: italic; font-size: 13px'>Note: 0 untuk sangat tidak puas; 5 untuk sangat puas</p>", unsafe_allow_html=True)
                                 questions = {
                                     "Seat Comfort": "Seat Comfort",
                                     "Food and Drink": "Food and Drink",
@@ -178,9 +247,6 @@ try:
                         st.balloons()
 
                         st.markdown("<p style='text-align: left; font-size: 24px; color: #FFA500;'>✨ Survey Anda telah terkirim dengan sukses!</p>", unsafe_allow_html=True)
-                
-                elif selected == "Hasil Survei":
-                    st.title("Hasil Survei")
 
                 elif selected == "Pengaturan":
                     st.title("Pengaturan")
