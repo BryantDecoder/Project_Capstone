@@ -34,6 +34,7 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     token = db.Column(db.String(100), nullable=True, default= None)
     survey = db.Column(db.Boolean, default=False)
+    result = db.Column(db.Boolean, default=None)
 
     def __init__(self, name, email, password):
         self.name = name

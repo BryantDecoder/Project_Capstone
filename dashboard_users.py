@@ -233,8 +233,10 @@ try:
                                     admin.survey_count += 1
                                     if satisfaction_prediction[0] == 1:
                                         admin.satisfied_count += 1
+                                        user.result = True
                                     else:
                                         admin.dissatisfied_count += 1
+                                        user.result = False
                                     db.session.commit()
                                     time.sleep(2)
                                 st.rerun()
@@ -243,10 +245,50 @@ try:
                         st.title("Thanks for your feedback!")
                         st.markdown("<h1 style='text-align: left; color: #4CAF50;'>🎉 Terima Kasih!</h1>", unsafe_allow_html=True)
                         st.markdown("<p style='text-align: left; font-size: 20px;'>Kami menghargai umpan balik Anda.</p>", unsafe_allow_html=True)
-                        
-                        st.balloons()
 
                         st.markdown("<p style='text-align: left; font-size: 24px; color: #FFA500;'>✨ Survey Anda telah terkirim dengan sukses!</p>", unsafe_allow_html=True)
+                        st.markdown('<br>', unsafe_allow_html=True)
+
+                        st.markdown("<h5>Hasil Survei</h5>", unsafe_allow_html=True)
+                        if user.result == True:
+                            st.markdown(
+                                """
+                                <div style="background-color:#d4edda;padding:10px;border-radius:5px;">
+                                    <span style="color:#17BE49;font-size:40px;font-weight:700;">Satisfied</span>
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                        else:
+                            st.markdown(
+                                """
+                                <div style="background-color:#f8d7da;padding:10px;border-radius:5px;">
+                                    <span style="color:#721c24;font-size:40px;font-weight:700;">Dissatisfied</span>
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                        st.markdown('<br>', unsafe_allow_html=True)
+
+                        st.markdown("<h5>Ringkasan Hasil Survei</h5>", unsafe_allow_html=True)
+                        if user.result == True:
+                            st.markdown(
+                                """
+                                <div style="background-color:#d4edda;padding:10px;border-radius:5px;">
+                                    <span style="color:#17BE49;font-size:20px;font-weight:700;">Satisfied</span>
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                        else:
+                            st.markdown(
+                                """
+                                <div style="background-color:#f8d7da;padding:10px;border-radius:5px;">
+                                    <span style="color:#721c24;font-size:20px;font-weight:700;">Dissatisfied</span>
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
 
                 elif selected == "Pengaturan":
                     st.title("Pengaturan")
