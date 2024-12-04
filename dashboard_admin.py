@@ -282,11 +282,13 @@ try:
                     with col1:
                         travel_counts = filtered_df['Type of Travel'].value_counts()
                         fig8 = px.bar(travel_counts, 
-                                    barmode='group', 
+                                    x=travel_counts.index, 
+                                    y=travel_counts.values, 
                                     title="Distribusi Tipe Perjalanan", 
                                     color=travel_counts.index,
                                     color_discrete_map={"Personal Travel": "#ADD8E6", "Business travel": "#2C3E50"},
-                                    labels={"Type of Travel": "Tipe Perjalanan", "value": "Jumlah"})
+                                    category_orders={"Type of Travel": ["Personal Travel", "Business travel"]},
+                                    labels={"Type of Travel": "Tipe Perjalanan", "y": "Jumlah"})
                         st.plotly_chart(fig8)
 
                     with col2:
