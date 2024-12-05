@@ -313,5 +313,5 @@ try:
                 show_error("Token tidak valid. Akses tidak diizinkan.")
                 
 except Exception as e:
-    show_error(f"Error! Hubungi Admin jika menurut anda ini adalah kesalahan. INFO: {e}")
+    show_error(f"ERROR! Hubungi Admin jika menurut anda ini adalah kesalahan.")
 
