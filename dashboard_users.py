@@ -6,7 +6,7 @@ import pandas as pd
 import pickle
 import base64
 
-st.set_page_config(page_title="Aerosite for User", page_icon=":airplane:", layout="wide")
+st.set_page_config(page_title="Aerosite for User", page_icon=":material/flight:", layout="wide")
 
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
@@ -190,7 +190,8 @@ try:
                             submit_button = st.form_submit_button("Submit")
 
                             if submit_button:
-                                with st.spinner("Mengirim survei..."):
+                                with st.status("Mengirim survei...", expanded=True) as status:
+                                    st.write("Survei dikirim...")
                                     data_new_record = pd.DataFrame({
                                         'Gender': [1 if gender == "Male" else 0], 
                                         'Age': [age],
@@ -214,10 +215,13 @@ try:
                                         'Departure Delay in Minutes': [departure_delay],
                                         'Arrival Delay in Minutes': [arrival_delay]
                                     })
-
+                                    time.sleep(1.5)
+                                    st.write("Survei diprediksi...")
                                     satisfaction_prediction = model.predict(data_new_record)
                                     prediction_text = "satisfied" if satisfaction_prediction[0] == 1 else "dissatisfied"
+                                    time.sleep(1.5)
                                     
+                                    st.write("Hasil Survei ditambahkan...")
                                     data_new_record['satisfaction'] = prediction_text
                                     data_new_record['Customer Type'] = None
                                     data_new_record['Gender'] = data_new_record['Gender'].replace({1: 'Male', 0: 'Female'})
@@ -238,6 +242,10 @@ try:
                                         admin.dissatisfied_count += 1
                                         user.result = False
                                     db.session.commit()
+                                    time.sleep(1.5)
+                                    status.update(
+                                        label="Berhasil!", state="complete", expanded=False
+                                    )
                                     time.sleep(2)
                                 st.rerun()
 
@@ -297,6 +305,8 @@ try:
                             del st.session_state["session_token"]
                         user.token = None
                         db.session.commit()
+                        st.toast("Log Out Berhasil!")
+                        time.sleep(1.5)
                         st.write(st.markdown("<meta http-equiv='refresh' content='0; url=http://localhost:5000/logout'>", unsafe_allow_html=True))
                         
             else:   
