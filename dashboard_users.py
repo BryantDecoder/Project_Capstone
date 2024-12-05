@@ -283,7 +283,7 @@ try:
                             st.markdown(
                                 """
                                 <div style="background-color:#d4edda;padding:10px;border-radius:5px;">
-                                    <span style="color:#17BE49;font-size:20px;font-weight:700;">Satisfied</span>
+                                    <span style="color:#17BE49;font-size:20px;font-weight:700;">Kami sangat senang mengetahui bahwa Anda puas dengan pengalaman penerbangan Anda. Terima kasih atas apresiasi yang Anda berikan. Kami akan terus berusaha memberikan pelayanan terbaik untuk setiap pelanggan kami!</span>
                                 </div>
                                 """,
                                 unsafe_allow_html=True
@@ -292,7 +292,7 @@ try:
                             st.markdown(
                                 """
                                 <div style="background-color:#f8d7da;padding:10px;border-radius:5px;">
-                                    <span style="color:#721c24;font-size:20px;font-weight:700;">Dissatisfied</span>
+                                    <span style="color:#721c24;font-size:20px;font-weight:700;">Kami mohon maaf atas ketidaknyamanan yang Anda alami selama penerbangan. Masukan Anda sangat berarti bagi kami, dan kami berkomitmen untuk memperbaiki layanan agar pengalaman Anda di masa depan lebih memuaskan. Terima kasih telah berbagi pengalaman Anda.</span>
                                 </div>
                                 """,
                                 unsafe_allow_html=True
