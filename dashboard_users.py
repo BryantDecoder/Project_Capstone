@@ -183,7 +183,7 @@ try:
                                             question = question_keys[i + j]
                                             with col:
                                                 st.write(questions[question])
-                                                survey_responses[question] = st.radio("Skala 1-5", options=[1, 2, 3, 4, 5], key=question, horizontal=True, help='*required')
+                                                survey_responses[question] = st.radio("Skala 0-5", options=[0, 1, 2, 3, 4, 5], key=question, horizontal=True, help='*required')
 
                                     st.markdown("---")
 
